@@ -1,0 +1,9 @@
+{
+  "EARLY_MORNING" : [5,8],
+  "MORNING" : [9,12],
+  "AFTERNOON" : [13,15],
+  "PM_DRIVE" : [16,17],
+  "EVENING" : [18,20],
+  "NIGHT" : [21,23],
+  "LATE_NIGHT" : [0,4]
+}

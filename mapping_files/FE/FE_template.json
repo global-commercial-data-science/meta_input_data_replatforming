@@ -1,0 +1,24 @@
+{
+    "stage_1": ["Unknown", "Music_Film_TV_Fiction_Group", "Sports_Fitness_Group",
+    "Science_Technology_Group", "Kids_Family_Leisure_Education_Group", "Arts_History_Group", "Society_Culture_Religion_Group",
+      "Comedy_Fiction_Group", "News_Crime_Group", "Business_Politics_Government_Group"],
+
+    "stage_2": ["Seasonal", "Pop", "Rock_n_indie", "Classical", "Focus_n_Relaxation", "Sports_and_workouts_playlists",
+    "Love", "Country", "Specials", "SmoothCountry_Live_stream", "SmoothChill_Live_Stream", "Smooth_Live_stream",
+    "RadioX_Live_Stream", "HeartDance_Live_Stream", "Heart90s_Live_Stream", "Heart80s_Live_Stream",
+    "Heart70s_Live_Stream", "Heart00s_Live_Stream", "Heart_Live_Stream", "Gold_Live_Stream", "ClassicFM_Live_Stream",
+    "CapitalXTRA_Live_Stream", "CapitalDance_Live_Stream", "Capital_Live_Stream", "LBC_Live_Stream",
+    "Live", "Playlist"],
+
+  "stage_3": ["catchup", "podcast", "newsflash"],
+
+  "stage_4": ["Capital", "CapitalDance", "CapitalXTRA", "ClassicFM", "Global", "Gold", "Heart", "Heart00s", "Heart70s",
+  "Heart80s", "Heart90s", "HeartDance", "LBC", "RadioX", "Smooth", "SmoothChill", "SmoothCountry", "PopBuzz"],
+
+  "stage_5": ["Android", "Alexa", "IOS", "Web"],
+
+  "stage_6": ["EARLY_MORNING_WEEKDAY", "EARLY_MORNING_WEEKEND", "MORNING_WEEKDAY", "MORNING_WEEKEND",
+    "AFTERNOON_WEEKDAY", "AFTERNOON_WEEKEND", "PM_DRIVE_WEEKDAY", "PM_DRIVE_WEEKEND", "NIGHT_WEEKDAY", "NIGHT_WEEKEND",
+    "LATE_NIGHT_WEEKDAY", "LATE_NIGHT_WEEKEND"]
+
+  }

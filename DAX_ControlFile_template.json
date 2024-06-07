@@ -1,0 +1,598 @@
+{
+
+  "start_date": "2023-06-22",
+  "version": "DEV_POD",
+
+  "segment_to_run": [
+    "AI",
+    "TI"
+  ],
+  "GID_table": "RD_RM.SANDBOX.{}_GIGYA_ID_LIST_{}_{}",
+  "analytics_table": "E:/inputdataanalysis/datasets/{}_{}.CSV",
+  "segment": {
+    "AI": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Auto_Automotive_Motor_Drive_Car_Group": 1,
+        "20-24": 0.5,
+        "25-34": 0.5,
+        "35-44" : 0.5,
+        "Automotive_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "TI": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Life_Leisure_Travel_Holiday_Group": 1,
+        "LBC_Live_Stream": 0.5,
+        "ClassicFM_Live_Stream": 0.5,
+        "Travel_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "HWC": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Kids_Family_Pets_Home_Shopper_Parenting_Group": 1,
+        "BREAKFAST_WEEKEND": 0.5,
+        "BREAKFAST_WEEKDAY": 0.5,
+        "PM_DRIVE_WEEKDAY": 0.5,
+        "PM_DRIVE_WEEKEND": 0.5,
+        "35-44" : 0.5,
+        "45-54" : 0.5,
+        "15-19" : -0.6,
+        "20-24" : -0.6,
+        "family_and_kids_playlist": 1,
+        "Family and Relationship_Live" : 0.6
+      },
+      "cluster_score": {}
+    },
+    "SE": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Sports_playlist": 1,
+        "EARLY_MORNING_WEEKEND": 0.5,
+        "EARLY_MORNING_WEEKDAY": 0.5,
+        "EVENING_WEEKDAY": 0.5,
+        "EVENING_WEEKEND": 0.5,
+        "Sports_Fitness_Health_Running_Group": 1,
+        "Sports_Live" : 1
+      },
+      "cluster_score": {}
+    },
+    "BO": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "LBC_Live_Stream": 1,
+        "MORNING_WEEKEND": 0.5,
+        "MORNING_WEEKDAY": 0.5,
+        "AFTERNOON_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKEND": 0.3,
+        "PM_DRIVE_WEEKDAY": 0.5,
+        "PM_DRIVE_WEEKEND": 0.5,
+        "35-44" : 0.5,
+        "45-54" : 0.5,
+        "Business_Politics_Government_Group": 1
+      },
+      "cluster_score": {}
+    },
+    "FE": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Pop": 1,
+        "MORNING_WEEKEND": 0.5,
+        "MORNING_WEEKDAY": 0.5,
+        "AFTERNOON_WEEKDAY": 0.5,
+        "AFTERNOON_WEEKEND": 0.5,
+        "Music_Film_TV_Fiction_Movie_Television_Pop_Group": 1
+      },
+      "cluster_score": {}
+    },
+    "CCI": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Professional_Finance_Money_Investing_Credit_Group": 1,
+        "MORNING_WEEKEND": 0.5,
+        "MORNING_WEEKDAY": 0.5,
+        "NIGHT_WEEKDAY": 0.5,
+        "NIGHT_WEEKEND": 0.5,
+        "20-24" : 0.5,
+        "25-34" : 0.5,
+        "Personal_Finance_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "TE": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Technology_Compute_Tech_Group": 1,
+        "NIGHT_WEEKEND": 0.5,
+        "NIGHT_WEEKDAY": 0.5,
+        "EARLY_MORNING_WEEKDAY": 0.5,
+        "EARLY_MORNING_WEEKEND": 0.5,
+        "Technology_and_Computing_Live": 1,
+        "Technology_and_Computing_playlist" : 0.6
+      },
+      "cluster_score": {}
+    },
+      "HWE": {
+        "is_main": true,
+        "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+        "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+        "project_id": "",
+        "model_parameters": [],
+        "top_models": [],
+        "final_model": "",
+        "weight_dict": {
+          "Focus_n_Relaxation": 1,
+          "MORNING_WEEKEND": 0.5,
+          "MORNING_WEEKDAY": 0.5,
+          "AFTERNOON_WEEKEND": 0.5,
+          "AFTERNOON_WEEKDAY": 0.5,
+          "NIGHT_WEEKEND": 0.5,
+          "NIGHT_WEEKDAY": 0.5,
+          "Sports_Fitness_Food_Health_Medical_Group": 1
+        },
+        "cluster_score": {}
+      },
+    "HO": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Home_Garden_Pets_Arts_Outdoor_Group" : 1,
+        "Focus_n_Relaxation": 0.6,
+        "MORNING_WEEKEND": 0.5,
+        "MORNING_WEEKDAY": 0.5,
+        "AFTERNOON_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKEND": 0.3,
+        "35-44": 0.5,
+        "45-54": 0.5,
+        "55-59" : 0.5,
+        "15-19" : -0.6,
+        "Home_Owners_Live" : 1
+      },
+      "cluster_score": {}
+    },
+     "ATT": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Music_Arts_History_Books_Group": 1,
+        "15-19": 0.5,
+        "20-24": 0.5,
+        "Attractions_Live": 1,
+        "Attractions_playlist" : 0.5
+      },
+      "cluster_score": {}
+  },
+    "EDU": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Education_Career_Science_History_Books_Group": 1,
+        "15-19": 0.5,
+        "20-24": 0.5,
+        "NIGHT_WEEKDAY": 0.3,
+        "NIGHT_WEEKEND": 0.3,
+        "Education_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "CARR" : {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Education_Professional_Career_Group": 1,
+        "20-24" : 0.5,
+        "25-34": 0.5,
+        "Career_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "BL": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Arts_History_Books_Literature_Fiction_Group": 1,
+        "15-19": 0.5,
+        "35-44" : 0.3,
+        "45-54" : 0.3,
+        "AFTERNOON_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKEND": 0.3,
+        "Books_and_Literature_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "PET": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Kids_Family_Pets_Home_Shopper_Parenting_Group": 1,
+        "MORNING_WEEKEND": 0.3,
+        "MORNING_WEEKDAY": 0.3,
+        "35-44": 0.5,
+        "45-54": 0.5,
+        "LATE_NIGHT_WEEKDAY": 0.3,
+        "LATE_NIGHT_WEEKEND": 0.3,
+        "Pets_Live": 1,
+        "Pets_playlist": 0.6
+      },
+      "cluster_score": {}
+    },
+    "PC": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Celebrity_Celeb_Television_TV_Pop_Group": 1,
+        "MORNING_WEEKEND": 0.3,
+        "MORNING_WEEKDAY": 0.3,
+        "20-24": 0.5,
+        "25-34": 0.5,
+        "Pop": 1
+      },
+      "cluster_score": {}
+    },
+    "NP": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "News_Crime_Politics_Government_Group": 1,
+        "35-44": 0.5,
+        "45-54": 0.5,
+        "LBC_Live_Stream": 1,
+        "MORNING_WEEKDAY": 0.5,
+        "MORNING_WEEKEND": 0.5,
+        "NIGHT_WEEKDAY": 0.5,
+        "NIGHT_WEEKEND": 0.5,
+        "m": 0.5
+      },
+      "cluster_score": {}
+    },
+    "VG": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Video Games_Game_Compute_Esport_Technology_Tech_Group": 1,
+        "AFTERNOON_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKEND": 0.3,
+        "15-19" : 0.5,
+        "20-24" : 0.5,
+        "m" : 0.5,
+        "Video_Games_Live": 1
+      },
+      "cluster_score": {}
+    },
+     "SF": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "MORNING_WEEKDAY": 0.3,
+        "MORNING_WEEKEND": 0.3,
+        "Fashion_Style_Clothing_Clothes_Life_Group": 1,
+        "f" : 1,
+        "Style_and_Fashion_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "SHOP": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "EARLY_MORNING_WEEKEND": 0.5,
+        "EARLY_MORNING_WEEKDAY": 0.5,
+        "Kids_Family_Pets_Home_Retail_Spending_Shopper_Parenting_Group": 1,
+        "35-44" : 0.5,
+        "45-54" : 0.5,
+        "Shoppers_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "EC": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Science_Environment_Education_Group": 1,
+        "MORNING_WEEKEND": 0.3,
+        "MORNING_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKDAY": 0.5,
+        "AFTERNOON_WEEKEND": 0.5,
+        "25-34" : 0.5,
+        "35-44" : 0.5,
+        "55-59" : 0.5,
+        "Environment": 1
+      },
+      "cluster_score": {}
+    },
+    "SCI": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Education_Science_Technology_Tech_Group": 1,
+        "AFTERNOON_WEEKDAY": 0.2,
+        "AFTERNOON_WEEKEND": 0.2,
+        "25-34": 0.5,
+        "55-59" : 0.5,
+        "Science_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "MH": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Health_Medical_Life_Medicine_Fitness_Group": 1,
+        "MORNING_WEEKEND": 0.3,
+        "MORNING_WEEKDAY": 0.3,
+        "25-34" : 0.5,
+        "35-44" : 0.5,
+        "55-59" : 0.5,
+        "Medical_Health_Live": 1
+      },
+      "cluster_score": {}
+    },
+   "AE": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Arts_History_Books_Group": 1,
+        "EARLY_MORNING_WEEKDAY":0.5,
+        "EARLY_MORNING_WEEKEND":0.5,
+        "NIGHT_WEEKDAY":0.3,
+        "NIGHT_WEEKEND":0.3,
+        "Fine_Arts_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "LE": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Life_Kids_Family_Parenting_Group": 1,
+        "MORNING_WEEKEND": 0.3,
+        "MORNING_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKEND": 0.3,
+        "AFTERNOON_WEEKDAY": 0.3,
+        "Life_Events_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "NON": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Society_Non_Profit_Philanthropy_Charity_Social Work_Society_Culture_Group": 1,
+        "MORNING_WEEKEND": 0.5,
+        "MORNING_WEEKDAY": 0.5,
+        "PM_DRIVE_WEEKDAY": 0.3,
+        "PM_DRIVE_WEEKEND": 0.3,
+        "Non-Profit": 1
+      },
+      "cluster_score": {}
+    },
+     "CPG": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Kids_Family_Consumer_Pets_Home_Shopper_Parenting_Group": 1,
+        "LATE_NIGHT_WEEKDAY": 0.2,
+        "LATE_NIGHT_WEEKEND": 0.2,
+        "AFTERNOON_WEEKDAY": 0.4,
+        "AFTERNOON_WEEKEND": 0.4,
+        "NIGHT_WEEKDAY": 0.2,
+        "NIGHT_WEEKEND": 0.2,
+        "Consumer_Product_Goods_Live": 1
+      },
+      "cluster_score": {}
+    },
+    "FOOD": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Food_Live": 1,
+        "AFTERNOON_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKEND": 0.3,
+        "Fitness_Food_Drink_Nutrition_Health_Group": 1
+      },
+      "cluster_score": {}
+    },
+    "FI": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Insurance_Live": 1,
+        "NIGHT_WEEKDAY": 0.5,
+        "NIGHT_WEEKEND": 0.5,
+        "LATE_NIGHT_WEEKDAY": 0.5,
+        "LATE_NIGHT_WEEKEND": 0.5,
+        "Business_Professional_Finance_Money_Credit_Investing_Group": 1
+      },
+      "cluster_score": {}
+    },
+    "HOL": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Holiday_Live": 1,
+        "Holiday_Christmas_Kids_Family_Parenting_Group": 1,
+        "35-44": 0.3,
+        "45-54": 0.3
+      },
+      "cluster_score": {}
+    },
+    "MOV": {
+      "is_main": true,
+      "input_file": "Input_Data_Files/DS_{}_{}_INPUT_{}.CSV",
+      "output_file": "Output_Data_Files/DS_{}_{}_OUTPUT_{}.CSV",
+      "project_id": "",
+      "model_parameters": [],
+      "top_models": [],
+      "final_model": "",
+      "weight_dict": {
+        "Music_Film_TV_Fiction_Movie_Comedy_Television_Pop_Group": 1,
+        "MORNING_WEEKEND": 0.3,
+        "MORNING_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKDAY": 0.3,
+        "AFTERNOON_WEEKEND": 0.3,
+        "25-34" : 0.3,
+        "35-44" : 0.3,
+        "Entertainment_playlist": 1,
+        "Entertainment_Live": 1
+      },
+      "cluster_score": {}
+    }
+  }
+}
