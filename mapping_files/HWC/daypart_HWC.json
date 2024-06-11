@@ -1,8 +1,0 @@
-{
-  "BREAKFAST" : [7,9],
-  "MORNING" : [10,12],
-  "AFTERNOON" : [13,15],
-  "PM_DRIVE" : [16,19],
-  "NIGHT" : [20,23],
-  "LATE_NIGHT" : [0,6]
-}

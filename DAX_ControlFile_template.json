@@ -2,7 +2,7 @@
 
   "start_date": "2023-06-22",
   "version": "DEV_POD",
-
+  "data_build" : false,
   "segment_to_run": [
     "AI",
     "TI"

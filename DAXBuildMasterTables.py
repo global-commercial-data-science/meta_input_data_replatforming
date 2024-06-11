@@ -1,38 +1,30 @@
 import snowflake.connector
 import pandas as pd
-from cdswritereadfunctions import load_input_file as rjf, write_json_to_file as wjf
 import sf_creds
 from datetime import datetime, timedelta
 import gc
 import boto3
-from io import StringIO
+import aws_cred
+from s3functions import upload_to_s3, download_json, upload_json
 pd.options.mode.chained_assignment = None
 
 
 # Initialising s3 client
-client = boto3.client('s3')
+
+session = boto3.Session(
+    aws_access_key_id=aws_cred.aws_access_key_id,
+    aws_secret_access_key=aws_cred.aws_secret_access_key
+)
+
+client = session.client('s3')
 bucket_name = 'data-project-meta'
-
-
-def upload_to_s3(csv_df, file_key, s3_client):
-
-    csv_buffer = StringIO()
-    csv_df.to_csv(csv_buffer, index=False)
-
-    try:
-        s3_client.put_object(Bucket=bucket_name, Key=file_key, Body=csv_buffer.getvalue())
-        status = f"DataFrame uploaded to {bucket_name}/{file_key} successfully."
-    except Exception as e:
-        status = "Error uploading DataFrame to S3: {e}"
-
-    return status
-
 
 
 def main():
 
     # Load arguments from control file
-    inputs = rjf('DAX_ControlFile.json')
+    inputs = download_json(client, 'control_files/DAX_ControlFile.json',
+                           bucket_name)
 
     end_date = inputs['start_date']
     start_date = (datetime.strptime(inputs["start_date"], '%Y-%m-%d') -
@@ -66,7 +58,7 @@ def main():
     # Uploading to S3
     file_id = f'meta_stage_2_files/total_duration_{start_date}_{version}.csv'
 
-    status = upload_to_s3(total_duration_df, file_id, client)
+    status = upload_to_s3(total_duration_df, file_id, client, bucket_name)
 
     print(status)
 
@@ -114,7 +106,7 @@ def main():
     # Uploading to S3
     file_id = f'meta_stage_2_files/podcast_duration_{start_date}_{version}.csv'
 
-    status = upload_to_s3(itunes_cat_raw, file_id, client)
+    status = upload_to_s3(itunes_cat_raw, file_id, client, bucket_name)
 
     print(status)
 
@@ -245,7 +237,7 @@ def main():
     # Uploading to S3
     file_id = f'meta_stage_2_files/playlist_duration_{start_date}_{version}.csv'
 
-    status = upload_to_s3(playlist_raw, file_id, client)
+    status = upload_to_s3(playlist_raw, file_id, client, bucket_name)
 
     print(status)
 
@@ -284,7 +276,13 @@ def main():
             '''
 
     listen_type_df = pd.read_sql(listen_type_query, ctx)
-    listen_type_df.to_csv(f'Input_Data_Files/listentype_duration_{start_date}_{version}.csv', index=False)
+
+    file_id = f'meta_stage_2_files/listentype_duration_{start_date}_{version}.csv'
+
+    status = upload_to_s3(listen_type_df, file_id, client, bucket_name)
+
+    print(status)
+
     del listen_type_df
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -304,7 +302,7 @@ def main():
     # Uploading to S3
     file_id = f'meta_stage_2_files/platform_duration_{start_date}_{version}.csv'
 
-    status = upload_to_s3(platform_df, file_id, client)
+    status = upload_to_s3(platform_df, file_id, client, bucket_name)
 
     print(status)
 
@@ -340,7 +338,7 @@ def main():
     # Uploading to S3
     file_id = f'meta_stage_2_files/age_duration_{start_date}_{version}.csv'
 
-    status = upload_to_s3(age_df, file_id, client)
+    status = upload_to_s3(age_df, file_id, client, bucket_name)
 
     print(status)
 
@@ -364,9 +362,9 @@ def main():
     gender_df = pd.read_sql(gender_query, ctx)
 
     # Uploading to S3
-    file_id = f'meta_stage_2_files/ender_duration_{start_date}_{version}.csv'
+    file_id = f'meta_stage_2_files/gender_duration_{start_date}_{version}.csv'
 
-    status = upload_to_s3(gender_df, file_id, client)
+    status = upload_to_s3(gender_df, file_id, client, bucket_name)
 
     print(status)
 

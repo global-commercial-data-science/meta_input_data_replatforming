@@ -2,14 +2,25 @@ import snowflake.connector
 import pandas as pd
 from datasetgenfunctions import group_categories, build_grouped_df, remove_outliers, scale_sparse_features, \
     reduce_df
-from cdswritereadfunctions import load_input_file as rjf, write_json_to_file as wjf
 import numpy as np
 import sf_creds
 from datetime import datetime, timedelta
 from sklearn import preprocessing
 import gc
 from functools import reduce
+import boto3
+import aws_cred
+from s3functions import get_data_from_s3, upload_to_s3, download_json, upload_json
+
 pd.options.mode.chained_assignment = None
+
+session = boto3.Session(
+    aws_access_key_id=aws_cred.aws_access_key_id,
+    aws_secret_access_key=aws_cred.aws_secret_access_key
+)
+
+client = boto3.client('s3')
+bucket_name = 'data-project-meta'
 
 
 def main():
@@ -22,11 +33,12 @@ def main():
     """
 
     # Load arguments from control file
-    inputs = rjf('DAX_ControlFile.json')
+    inputs = download_json(client, 'control_files/DAX_ControlFile.json',
+                           bucket_name)
 
     end_date = inputs['start_date']
     start_date = (datetime.strptime(inputs["start_date"], '%Y-%m-%d') -
-                timedelta(weeks=4)).strftime('%Y-%m-%d')
+                  timedelta(weeks=4)).strftime('%Y-%m-%d')
     version = inputs['version']
 
     # Snowflake connector
@@ -45,15 +57,16 @@ def main():
     # Looping through all segments
     for segment in segment_to_run:
 
-        column_template = rjf(f'mapping_files/{segment}/{segment}_template.json')
+        column_template = download_json(client, f'mapping_files/{segment}/{segment}_template.json',
+                                        bucket_name)
         weight_dict = inputs['segment'][segment]['weight_dict']
 
         tables_to_join = []
 
-    # -----------------------------------------------------------------------------------------------------------------------
-    # Total Duration table
-
-        total_duration_df = pd.read_csv(f'Input_Data_Files/total_duration_{start_date}_{version}.csv')
+        # -----------------------------------------------------------------------------------------------------------------------
+        # Total Duration table
+        input_file_key = f'meta_stage_2_files/total_duration_{start_date}_{version}.csv'
+        total_duration_df = get_data_from_s3(client, input_file_key, bucket_name)
         total_duration_df.set_index('GIGYA_ID', inplace=True, drop=True)
 
         total_duration_df['TOTAL_LISTEN_TIME'] = total_duration_df['TOTAL_LISTEN_TIME'].astype('float32')
@@ -62,12 +75,12 @@ def main():
         del total_duration_df
 
         print('total duration table complete...')
-    
 
-# -----------------------------------------------------------------------------------------------------------------------
-    # Building Itunes Categories Dataset : Stage 1
+        # -----------------------------------------------------------------------------------------------------------------------
+        # Building Itunes Categories Dataset : Stage 1
 
-        itunes_cat_raw = pd.read_csv(f'Input_Data_Files/podcast_duration_{start_date}_{version}.csv')
+        input_file_key = f'meta_stage_2_files/podcast_duration_{start_date}_{version}.csv'
+        itunes_cat_raw = get_data_from_s3(client, input_file_key, bucket_name)
         itunes_cat_raw['LISTEN_DURATION'] = itunes_cat_raw['LISTEN_DURATION'].astype('float32')
 
         # Further Preprocessing
@@ -82,7 +95,7 @@ def main():
 
         # Category Group map
         cat_map = f'mapping_files/{segment}/podcast_category_map_{segment}.json'
-        category_map = rjf(cat_map)
+        category_map = download_json(client, cat_map, bucket_name)
 
         # Assigning columns to the category groups
         col_names = list(itunes_cat_df.columns)
@@ -108,15 +121,16 @@ def main():
 
         print('podcast category table built...')
 
-# -----------------------------------------------------------------------------------------------------------------------
+        # -----------------------------------------------------------------------------------------------------------------------
         # Building Playlist Dataset: stage 2
 
         print('Building playlist table....')
 
         playlist_map_file = f'mapping_files/{segment}/playlist_group_map_{segment}.json'
-        playlist_dict = rjf(playlist_map_file)
+        playlist_dict = download_json(client, playlist_map_file, bucket_name)
 
-        playlist_raw = pd.read_csv(f'Input_Data_Files/playlist_duration_{start_date}_{version}.csv')
+        input_file_key = f'meta_stage_2_files/playlist_duration_{start_date}_{version}.csv'
+        playlist_raw = get_data_from_s3(client, input_file_key, bucket_name)
         playlist_raw['TOTAL_DURATION'] = playlist_raw['TOTAL_DURATION'].astype('float32')
         playlist_df = playlist_raw.pivot_table(index='GIGYA_ID', columns='PLAYLIST',
                                                values='TOTAL_DURATION', aggfunc='sum')
@@ -140,7 +154,7 @@ def main():
         if inputs['segment'][segment]['is_main']:
             playlist_dict['prev_playlists'] = new_playlists
 
-        wjf(playlist_map_file, playlist_dict)
+        upload_json(playlist_dict, client, playlist_map_file, bucket_name)
 
         playlist_map = playlist_dict['map']
 
@@ -203,13 +217,14 @@ def main():
                 if (cls.split('_')[0] in column_template['stage_4']) or \
                         (cls.split('_')[0].replace('News', '') in column_template['stage_4']):
                     print(f'col {cls}')
-                    playlist_df_grouped[cls.split('_')[0].replace('News', '') + '_Live_Stream'] += playlist_df_grouped[cls]
+                    playlist_df_grouped[cls.split('_')[0].replace('News', '') + '_Live_Stream'] += playlist_df_grouped[
+                        cls]
                     if '_Live_Stream' not in cls:
                         playlist_df_grouped.drop(columns=[cls], inplace=True)
                 else:
                     print(f'\n {cls} COLUMN FOUND \n')
 
-        wjf(playlist_map_file, playlist_dict)
+        upload_json(playlist_dict, client, playlist_map_file, bucket_name)
 
         tables_to_join.append(playlist_df_grouped.copy())
 
@@ -217,7 +232,7 @@ def main():
 
         print('playlist table built...')
 
-# -----------------------------------------------------------------------------------------------------------------------
+        # -----------------------------------------------------------------------------------------------------------------------
         # Building channel listen type dataset (NOT IN USE)
         """
         print('building channel listen type table...')
@@ -286,12 +301,13 @@ def main():
         print('chanel listen type table built...')
         """
 
-# -----------------------------------------------------------------------------------------------------------------------
+        # -----------------------------------------------------------------------------------------------------------------------
         # Building Listen Type Dataset
 
         print('building listen type table....')
 
-        listen_type_df = pd.read_csv(f'Input_Data_Files/listentype_duration_{start_date}_{version}.csv')
+        input_file_key = f'meta_stage_2_files/listentype_duration_{start_date}_{version}.csv'
+        listen_type_df = get_data_from_s3(client, input_file_key, bucket_name)
         listen_type_df['TOTAL_LISTEN_TIME'] = listen_type_df['TOTAL_LISTEN_TIME'].astype('float32')
         listen_type_df = listen_type_df.pivot_table(index='GIGYA_ID', columns='AOD_TYPE',
                                                     values='TOTAL_LISTEN_TIME', aggfunc='sum')
@@ -307,7 +323,7 @@ def main():
 
         print('listen type table built....')
 
-# -----------------------------------------------------------------------------------------------------------------------
+        # -----------------------------------------------------------------------------------------------------------------------
         # Channel Table (NOT IN USE)
         """
         print('building channel table....')
@@ -339,12 +355,13 @@ def main():
 
         print('channel table built....')
         """
-    # -----------------------------------------------------------------------------------------------------------------------
-    # Platform Table
+        # -----------------------------------------------------------------------------------------------------------------------
+        # Platform Table
 
         print('building platform table....')
 
-        platform_df = pd.read_csv(f'Input_Data_Files/platform_duration_{start_date}_{version}.csv')
+        input_file_key = f'meta_stage_2_files/platform_duration_{start_date}_{version}.csv'
+        platform_df = get_data_from_s3(client, input_file_key, bucket_name)
         platform_df['PLAYER_COUNT'] = platform_df['PLAYER_COUNT'].astype('float32')
         platform_df = platform_df.pivot_table(index='GIGYA_ID', columns='DAX_PLATFORM', values='PLAYER_COUNT',
                                               aggfunc='sum')
@@ -370,13 +387,13 @@ def main():
 
         print('platform table built....')
 
-# -----------------------------------------------------------------------------------------------------------------------
-    # Daypart Table
+        # -----------------------------------------------------------------------------------------------------------------------
+        # Daypart Table
 
         print('building daypart table....')
 
         dp_map = f'mapping_files/{segment}/daypart_{segment}.json'
-        daypart_map = rjf(dp_map)
+        daypart_map = download_json(client, dp_map, bucket_name)
 
         daypart_init_query = '''SELECT GIGYA_ID, KEY_, SUM(DURATION) AS LISTEN_NUMBER_TIME FROM
     (SELECT GIGYA_ID, DURATION,
@@ -414,12 +431,13 @@ def main():
 
         print('daypart table built....')
 
-    # -----------------------------------------------------------------------------------------------------------------------
-    # Age Table
+        # -----------------------------------------------------------------------------------------------------------------------
+        # Age Table
 
         print('building age table....')
 
-        age_df = pd.read_csv(f'Input_Data_Files/age_duration_{start_date}_{version}.csv')
+        input_file_key = f'meta_stage_2_files/age_duration_{start_date}_{version}.csv'
+        age_df = get_data_from_s3(client, input_file_key, bucket_name)
         age_pivot = age_df.pivot_table(index='GIGYA_ID', columns='AGE_BAND', values='AGE_BOOL',
                                        aggfunc='first')
         age_pivot.columns.name = None
@@ -427,12 +445,13 @@ def main():
             age_pivot.drop(columns=['u'], inplace=True)
         age_pivot.fillna(0, inplace=True)
 
-    #-----------------------------------------------------------------------------------------------------
+        #-----------------------------------------------------------------------------------------------------
         # Gender Table
 
         print('building gender table')
 
-        gender_df = pd.read_csv(f'Input_Data_Files/gender_duration_{start_date}_{version}.csv')
+        input_file_key = f'meta_stage_2_files/gender_duration_{start_date}_{version}.csv'
+        gender_df = get_data_from_s3(client, input_file_key, bucket_name)
         gender_pivot = gender_df.pivot_table(index='GIGYA_ID', columns='GENDER', values='GENDER_BOOL',
                                              aggfunc='first')
         gender_pivot.columns.name = None
@@ -442,7 +461,7 @@ def main():
 
         gender_pivot.fillna(0, inplace=True)
 
-    #-----------------------------------------------------------------------------------------------------
+        #-----------------------------------------------------------------------------------------------------
 
         print('joining all tables....')
         # Substituting pd.concat with merge
@@ -459,17 +478,12 @@ def main():
 
         print(f'size of dataset {len(complete_df)}')
 
-
         if 'newsflash' in complete_df.columns:
             complete_df['Live'] = complete_df['Live'] + complete_df['newsflash']
             complete_df.drop(columns=['newsflash'], axis=1, inplace=True)
 
-        ##TODO DONT FORGET TO UNCOMMENT THE BELOW
         df_outlier_removed = remove_outliers(complete_df)
-        #df_outlier_removed = complete_df.copy()
         df_outlier_removed.drop(['TOTAL_LISTEN_TIME'], axis=1, inplace=True)
-
-        df_outlier_removed.to_csv(inputs['analytics_table'].format(segment, start_date, version))
 
         df_outlier_removed.fillna(0, inplace=True)
 
@@ -497,22 +511,23 @@ def main():
             segment_to_run = list(set(segment_to_run) - {segment})
             inputs['segment_to_run'] = segment_to_run
             print(f'podcast signal for {segment} not found')
-            wjf('DAX_ControlFile.json', inputs)
+            upload_json(inputs, client, 'control_files/DAX_ControlFile.json',
+                        bucket_name)
             continue
         else:
             norm_df[podcast_index[0]] = norm_df[podcast_index[0]]
-
 
         if len(set(playlist_index).intersection(set(norm_df.columns.to_list()))) != 0:
             if norm_df[playlist_index[0]].sum() == 0:
                 inputs['segment'][segment]['weight_dict'].pop(playlist_index[0], None)
                 print(f'playlist signal for {segment} not found')
-                wjf('DAX_ControlFile.json', inputs)
+                upload_json(inputs, client, 'control_files/DAX_ControlFile.json',
+                            bucket_name)
             else:
-                norm_df[playlist_index[0]]= norm_df[playlist_index[0]]
+                norm_df[playlist_index[0]] = norm_df[playlist_index[0]]
 
+#--------------------------------------------------------------------------------------------------------------
 
-        #--------------------------------------------------------------------------------------------------------------
 
         # norm_df[podcast_index[0]] = norm_df[podcast_index[0]]*10
         column = norm_df.columns.to_list()
@@ -528,11 +543,13 @@ def main():
         transformed_df = pd.concat([reduced_df, strong_df], axis=1)
         transformed_df.fillna(0, inplace=True)
 
-        input_file = inputs['segment'][segment]['input_file'].format(start_date, segment, version)
+        output_file_key = f'meta_stage_3_files/DS_{start_date}_{segment}_INPUT_{version}.CSV'
+        status = upload_to_s3(transformed_df, output_file_key, client, bucket_name)
 
-        transformed_df.to_csv(input_file)
+        print(status)
 
-        norm_df.to_csv(inputs['analytics_table'].format(segment, start_date, 'INP'))
+        analytics_file_key = f'meta_analytics_files/{segment}_{start_date}.CSV'
+        status = upload_to_s3(norm_df, analytics_file_key, client, bucket_name)
 
         del tables_to_join
 
@@ -549,16 +566,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
