@@ -3,6 +3,5 @@ pandas
 snowflake
 numpy
 boto3
-sklearn
 scikit-learn
 tqdm
