@@ -1,0 +1,112 @@
+{
+  "Seasonal": [
+    "Asia Travel",
+    "Camping",
+    "North America Travel"
+  ],
+  "Pop": [
+    "Pop Culture",
+    "Movies"
+  ],
+  "Rock_n_Indie": [
+    "Alternative Rock",
+    "Rock Music",
+    "Mental Health",
+    "Video Gaming"
+  ],
+  "Specials": [
+    "Special Interest (Indie/Art House)",
+    "Special Interest",
+    "Children’s Health",
+    "Cats",
+    "Pets",
+    "Dogs",
+    "Pet Insurance"
+  ],
+  "Classical": [
+    "Classic Hits",
+    "Oldies/Adult Standards",
+    "Classical Music"
+  ],
+  "Focus_n_Relaxation": [
+    "Wellness",
+    "Spas",
+    "Running and Jogging"
+  ],
+  "Weekend": [
+    "Dance and Electronic Music",
+    "Fitness and Exercise"
+  ],
+  "Hip_Hop": [
+    "Hip Hop Music",
+    "R&B/Soul/Funk"
+  ],
+  "Legends": [
+    "Contemporary Hits/Pop/Top 40",
+    "Blues"
+  ],
+  "Countdown": [
+    "Music",
+    "Top Charts",
+    "Music Charts"
+  ],
+  "Country": [
+    "Country Music"
+  ],
+
+  "Sports_playlist": [
+    "Cricket",
+ "Walking",
+ "Snooker/Pool/Billiards",
+ "Lacrosse",
+ "Boxing",
+ "Swimming",
+ "Martial Arts",
+ "Basketball",
+ "Badminton",
+ "Cheerleading",
+ "Gymnastics",
+ "Beach Volleyball",
+ "American Football",
+ "Diving",
+ "Equine Sports",
+ "Skiing",
+ "Olympic Sports",
+ "College Sports",
+ "Baseball",
+ "Wrestling",
+ "Fishing Sports",
+ "Golf",
+ "Bodybuilding",
+ "Table Tennis",
+ "Water Polo",
+ "Inline Skating",
+ "Squash",
+ "Auto Racing",
+ "Hunting and Shooting",
+ "Weightlifting",
+ "Volleyball",
+ "Poker and Professional Gambling",
+ "Fantasy Sports",
+ "Sports Equipment",
+ "Darts",
+ "Track and Field",
+ "Rugby",
+ "Sports",
+ "Softball",
+ "Field Hockey",
+ "Bowling",
+ "Ice Hockey",
+ "Rodeo",
+ "Disabled Sports",
+ "Rowing",
+ "Cycling",
+ "Soccer",
+ "Sailing",
+ "Extreme Sports",
+ "Figure Skating",
+ "Australian Rules Football",
+ "Tennis"
+  ]
+
+}

@@ -1,0 +1,68 @@
+{
+  "Seasonal": [
+    "Asia Travel",
+    "Camping",
+    "North America Travel"
+  ],
+  "Pop": [
+    "Pop Culture",
+    "Movies"
+  ],
+  "Rock_n_Indie": [
+    "Alternative Rock",
+    "Rock Music",
+    "Mental Health",
+    "Video Gaming"
+  ],
+  "Specials": [
+    "Special Interest (Indie/Art House)",
+    "Special Interest",
+    "Children’s Health",
+    "Cats",
+    "Pets",
+    "Dogs",
+    "Pet Insurance"
+  ],
+  "Classical": [
+    "Classic Hits",
+    "Oldies/Adult Standards",
+    "Classical Music"
+  ],
+  "Focus_n_Relaxation": [
+    "Wellness",
+    "Spas",
+    "Running and Jogging"
+  ],
+  "Weekend": [
+    "Dance and Electronic Music",
+    "Fitness and Exercise"
+  ],
+  "Hip_Hop": [
+    "Hip Hop Music",
+    "R&B/Soul/Funk"
+  ],
+  "Legends": [
+    "Contemporary Hits/Pop/Top 40",
+    "Blues"
+  ],
+  "Countdown": [
+    "Music",
+    "Top Charts",
+    "Music Charts"
+  ],
+  "Country": [
+    "Country Music"
+  ],
+  "Real_Estate_playlist": ["Real Estate Buying and Selling",
+ "Vacation Properties",
+ "Industrial Property",
+ "Houses",
+ "Land and Farms",
+ "Real Estate",
+ "Developmental Sites",
+ "Retail Property",
+ "Apartments",
+ "Office Property",
+ "Hotel Properties",
+ "Real Estate Renting and Leasing"]
+}

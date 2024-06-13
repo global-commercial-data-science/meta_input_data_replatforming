@@ -1,0 +1,82 @@
+{
+  "Seasonal": [
+    "Asia Travel",
+    "Camping",
+    "North America Travel"
+  ],
+  "Pop": [
+    "Pop Culture",
+    "Movies"
+  ],
+  "Rock_n_Indie": [
+    "Alternative Rock",
+    "Rock Music",
+    "Mental Health",
+    "Video Gaming"
+  ],
+  "Specials": [
+    "Special Interest (Indie/Art House)",
+    "Special Interest",
+    "Children’s Health",
+    "Cats",
+    "Pets",
+    "Dogs",
+    "Pet Insurance"
+  ],
+  "Classical": [
+    "Classic Hits",
+    "Oldies/Adult Standards",
+    "Classical Music"
+  ],
+  "Focus_n_Relaxation": [
+    "Wellness",
+    "Spas",
+    "Running and Jogging"
+  ],
+  "Weekend": [
+    "Dance and Electronic Music",
+    "Fitness and Exercise"
+  ],
+  "Hip_Hop": [
+    "Hip Hop Music",
+    "R&B/Soul/Funk"
+  ],
+  "Legends": [
+    "Contemporary Hits/Pop/Top 40",
+    "Blues"
+  ],
+  "Countdown": [
+    "Music",
+    "Top Charts",
+    "Music Charts"
+  ],
+  "Country": [
+    "Country Music"
+  ],
+  "Video_Gaming_playlist": [
+    "Role-Playing Video Games",
+ "eSports",
+ "MMOs",
+ "Action-Adventure Video Games",
+ "Educational Video Games",
+ "Music and Party Video Games",
+ "Racing Video Games",
+ "Video Game Genres",
+ "Action Video Games",
+ "Sports Video Games",
+ "Puzzle Video Games",
+ "Console Games",
+ "Strategy Video Games",
+ "Simulation Video Games",
+ "Adult Video Games",
+ "PC Games",
+ "Exercise and Fitness Video Games",
+ "Horror Video Games",
+ "Mobile Games",
+ "Video Gaming",
+ "Family Video Games",
+ "Adventure Video Games",
+ "Casual Games",
+ "Casino and Gambling Video Games"
+  ]
+}
